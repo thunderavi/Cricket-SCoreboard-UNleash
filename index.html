@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Live Cricket Scoreboard — Landing</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand brand" href="#">🏏 ScoreBoard</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navLinks">
+        <ul class="navbar-nav ms-auto align-items-center me-3">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./Pages/Team.html">Teams</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="./Pages/SignUp.html">Login</a></li>
+        </ul>
+
+        <div class="d-flex">
+          <a class="btn btn-sm btn-primary-acc" href="Pages/SignUp.html" style="min-width:110px">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero container-fluid">
+    <div class="row w-100 gx-4">
+      <!-- LEFT: sliding thumbnails -->
+      <div class="col-lg-7 left">
+        <div class="slider-viewport">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slide">
+              <img src="image/stadium.jpeg" alt="Cricket stadium">
+              <div class="slide-badge">Stadium</div>
+            </div>
+            <div class="slide">
+              <img src="image/batsman.jpeg" alt="Cricket player">
+              <div class="slide-badge">Batsman</div>
+            </div>
+            <div class="slide">
+              <img src="image/action.jpeg" alt="Match action">
+              <div class="slide-badge">Match Day</div>
+            </div>
+            <div class="slide">
+              <img src="image/match.webp" alt="Cricket ball">
+              <div class="slide-badge">Perfect Shot</div>
+            </div>
+            <!-- repeat slides for smooth looping -->
+            <div class="slide">
+              <img src="image/stadium.jpeg" alt="Cricket stadium">
+              <div class="slide-badge">Stadium</div>
+            </div>
+            <div class="slide">
+              <img src="image/batsman.jpeg" alt="Cricket player">
+              <div class="slide-badge">Batsman</div>
+            </div>
+            <div class="slide">
+              <img src="image/action.jpeg" alt="Match action">
+              <div class="slide-badge">Match Day</div>
+            </div>
+            <div class="slide">
+              <img src="image/action.jpeg" alt="Cricket ball">
+              <div class="slide-badge">Perfect Shot</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-lg-5 right d-flex flex-column justify-content-center">
+        <div style="max-width:520px;">
+          <div class="h-title">Live Cricket Match Scoreboard</div>
+          <div class="h-sub">
+            Futuristic, real-time scoreboard system — update runs, wickets & overs dynamically, highlight milestones,
+            and get a simple win-probability estimate. Designed for scorers, coaches, and fans.
+          </div>
+
+          <div class="feature-list">
+            <div class="feature"><div class="dot"></div><div><strong>Real-time updates</strong><div style="color:var(--muted);font-size:13px">Enter runs & overs live.</div></div></div>
+            <div class="feature"><div class="dot"></div><div><strong>Milestone alerts</strong><div style="color:var(--muted);font-size:13px">Automatic 50 / 100 highlights.</div></div></div>
+            <div class="feature"><div class="dot"></div><div><strong>Win Predictor</strong><div style="color:var(--muted);font-size:13px">Simple algorithmic estimate.</div></div></div>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn btn-primary-acc" href="#demo" role="button">Start Demo</a>
+            <a class="btn btn-ghost" href="#features" role="button">Explore Features</a>
+          </div>
+
+          <div class="demo-card">
+            <small style="color:var(--muted)">Quick demo:</small>
+            <div style="display:flex;gap:10px;margin-top:8px;align-items:center">
+              <div style="background:#071019;padding:10px 12px;border-radius:8px;font-weight:700">Score <span style="color:var(--accent)">0/0</span></div>
+              <div style="background:#071019;padding:10px 12px;border-radius:8px">Overs <span style="color:var(--accent)">0.0</span></div>
+              <div style="background:#071019;padding:10px 12px;border-radius:8px">Batsman <span style="color:var(--accent)">0</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.03);">
+          <h5 style="color:var(--accent)">Live Scoreboard Demo</h5>
+          <p style="color:var(--muted)">This is a compact demo. If you want, I’ll hook in the full dynamic controls (runs/wickets/overs + highlight logic + predictor) below this landing layout.</p>
+          <div class="d-flex gap-2 flex-wrap">
+            <button class="btn btn-sm btn-primary-acc" onclick="alert('Demo: Add dynamic scoreboard? I can add it now.')">Add Live Controls</button>
+            <button class="btn btn-sm btn-ghost" onclick="window.scrollTo({top:0, behavior:'smooth'})">Back to Top</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Main Script -->
+  <script>
+  // ---------------- Slider animation -----------------
+  const speedSeconds = 20;
+  document.querySelectorAll('.slider-track').forEach(track => {
+    track.style.animationDuration = speedSeconds + 's';
+  });
+
+  const viewport = document.querySelector('.slider-viewport');
+  viewport.addEventListener('touchstart', () => {
+    document.querySelectorAll('.slider-track').forEach(t => t.style.animationPlayState = 'paused');
+  });
+  viewport.addEventListener('touchend', () => {
+    document.querySelectorAll('.slider-track').forEach(t => t.style.animationPlayState = 'running');
+  });
+
+  // ---------------- Navbar login/logout -----------------
+  function updateNavbar() {
+    const navbar = document.querySelector(".navbar-nav");
+    const signupBtnContainer = document.querySelector(".d-flex");
+
+    if (!navbar) return;
+
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      navbar.innerHTML = `
+        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Pages/Team.html">Teams</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Pages/Dash.html">Dashboard</a></li>
+        
+      `;
+      
+      if (signupBtnContainer) {
+        signupBtnContainer.innerHTML = `
+          <a class="btn btn-sm btn-secondary logout-btn" href="#" style="min-width:110px">Logout</a>
+        `;
+      }
+
+      document.querySelectorAll(".logout-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          localStorage.removeItem("isLoggedIn");
+          window.location.href = "./Pages/SignUp.html";
+        });
+      });
+
+    } else {
+      navbar.innerHTML = `
+        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Pages/Team.html">Teams</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="./Pages/SignUp.html">Login</a></li>
+      `;
+      
+      if (signupBtnContainer) {
+        signupBtnContainer.innerHTML = `
+          <a class="btn btn-sm btn-primary-acc" href="./Pages/SignUp.html" style="min-width:110px">Sign Up</a>
+        `;
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", updateNavbar);
+  </script>
+</body>
+</html>

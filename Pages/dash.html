@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — ScoreBoard</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/dash.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0b0f19;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">🏏 ScoreBoard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navLinks">
+        <ul class="navbar-nav ms-auto align-items-center me-3" id="navbarItems">
+          <!-- Dynamic navbar items will be injected here -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Welcome to Dashboard</h1>
+    <p>This is your main dashboard after login/signup.</p>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function updateNavbar() {
+  const navbar = document.querySelector(".navbar-nav");
+  const signupBtnContainer = document.querySelector(".d-flex");
+
+  if (!navbar) return; // in case navbar is missing
+
+  if (localStorage.getItem("isLoggedIn") === "true") {
+    navbar.innerHTML = `
+      <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Teams</a></li>
+      <li class="nav-item"><a class="nav-link logout-btn" href="#">Logout</a></li>
+    `;
+    if (signupBtnContainer) {
+      signupBtnContainer.innerHTML = `
+        <a class="btn btn-sm btn-secondary logout-btn" href="#" style="min-width:110px">Logout</a>
+      `;
+    }
+    document.querySelectorAll(".logout-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "./Pages/SignUp.html";
+      });
+    });
+  } else {
+    navbar.innerHTML = `
+      <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Teams</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
+      <li class="nav-item"><a class="nav-link" href="./Pages/SignUp.html">Login</a></li>
+    `;
+    if (signupBtnContainer) {
+      signupBtnContainer.innerHTML = `
+        <a class="btn btn-sm btn-primary-acc" href="./Pages/SignUp.html" style="min-width:110px">Sign Up</a>
+      `;
+    }
+  }
+}
+
+// Call it on page load
+document.addEventListener("DOMContentLoaded", updateNavbar);
+
+  </script>
+
+</body>
+</html>
