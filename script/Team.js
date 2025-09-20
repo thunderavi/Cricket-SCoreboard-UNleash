@@ -277,6 +277,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Function to view team (navigate to TeamForm.html)
+  function viewTeam(teamId) {
+    window.location.href = `TeamForm.html?teamId=${teamId}`;
+  }
+
   // Render a team card
   function renderTeam(team) {
     const col = document.createElement("div");
@@ -289,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="card-text" style="color:#c5c6c7; margin-bottom: 0.25rem;">Captain: ${team.captain}</p>
           <p class="card-text" style="color:#c5c6c7; font-size: 0.9rem;">${team.description}</p>
           <div class="d-flex gap-2 mt-2">
-            <a href="#" class="btn btn-sm btn-primary-acc">View Team</a>
+            <button class="btn btn-sm btn-primary-acc" onclick="viewTeam(${team.id})">View Team</button>
             <button class="btn btn-sm btn-outline-danger delete-btn" onclick="confirmDelete(${team.id})">
               <i class="fas fa-trash"></i>
             </button>
@@ -303,6 +308,9 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     teamContainer.appendChild(col);
   }
+
+  // Make viewTeam function globally accessible
+  window.viewTeam = viewTeam;
 
   // Confirm delete function (global scope)
   window.confirmDelete = function(teamId) {
