@@ -39,8 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Next button
   document.getElementById("nextBtn").addEventListener("click", () => {
-    showMessage("Match functionality will be implemented next!", "info");
-    // TODO: Navigate to match scoring page
+    if (!matchData) {
+      showMessage("Match data not properly saved. Please try the toss again.", "error");
+      return;
+    }
+    
+    // Save match data to localStorage before navigating
+    localStorage.setItem('currentMatch', JSON.stringify(matchData));
+    console.log("Saving match data:", matchData); // Debug log
+    
+    showMessage("Redirecting to scoreboard...", "success");
+    setTimeout(() => {
+      window.location.href = "Board.html";
+    }, 1000);
   });
 
   // Functions
@@ -128,11 +139,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (teamNumber === 1 && selectedTeam2 && selectedTeam2.id === team.id) {
       showMessage("Please select different teams", "error");
       team1Select.value = "";
+      selectedTeam1 = null;
+      team1Info.style.display = "none";
+      updateTossVisibility();
       return;
     }
     if (teamNumber === 2 && selectedTeam1 && selectedTeam1.id === team.id) {
       showMessage("Please select different teams", "error");
       team2Select.value = "";
+      selectedTeam2 = null;
+      team2Info.style.display = "none";
+      updateTossVisibility();
       return;
     }
 
