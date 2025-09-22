@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   let playersData = [];
   let completedPlayers = [];
+  let currentBattingTeam = null; // Add this to track current batting team
 
   // DOM Elements
   const playerSelectionSection = document.getElementById("playerSelectionSection");
@@ -125,17 +126,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initializeInnings() {
-    const battingTeam = currentInnings === 1 ? matchData.battingFirst : 
-                       (matchData.battingFirst.id === matchData.team1.id ? matchData.team2 : matchData.team1);
+    // Determine batting team for current innings
+    currentBattingTeam = currentInnings === 1 ? matchData.battingFirst : 
+                        (matchData.battingFirst.id === matchData.team1.id ? matchData.team2 : matchData.team1);
+    
+    console.log(`Innings ${currentInnings}: ${currentBattingTeam.name} is batting`); // Debug log
     
     // Update match info bar
-    document.getElementById('currentTeamLogo').src = battingTeam.logo;
-    document.getElementById('currentTeamName').textContent = battingTeam.name;
+    document.getElementById('currentTeamLogo').src = currentBattingTeam.logo;
+    document.getElementById('currentTeamName').textContent = currentBattingTeam.name;
     document.getElementById('matchPhase').textContent = `${currentInnings === 1 ? '1st' : '2nd'} Innings`;
     
     // Update batting team display
-    document.getElementById('battingTeamLogo').src = battingTeam.logo;
-    document.getElementById('battingTeamName').textContent = battingTeam.name;
+    document.getElementById('battingTeamLogo').src = currentBattingTeam.logo;
+    document.getElementById('battingTeamName').textContent = currentBattingTeam.name;
     
     // Reset team stats for new innings
     teamStats = {
@@ -146,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
       sixes: 0
     };
     
+    // Reset completed players for new innings
     completedPlayers = [];
     
     // Load players for current batting team
@@ -154,25 +159,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadCurrentTeamPlayers() {
-    const battingTeam = currentInnings === 1 ? matchData.battingFirst : 
-                       (matchData.battingFirst.id === matchData.team1.id ? matchData.team2 : matchData.team1);
+    // Make sure we're using the correct batting team for current innings
+    const battingTeam = currentBattingTeam;
     
+    console.log(`Loading players for team: ${battingTeam.name} (ID: ${battingTeam.id})`); // Debug log
+    
+    // Filter players for the current batting team only
     const teamPlayers = playersData.filter(p => p.teamId === battingTeam.id);
+    console.log(`Found ${teamPlayers.length} players for this team`); // Debug log
     
+    // Clear and populate player selection dropdown
     playerSelect.innerHTML = '<option value="">Choose player...</option>';
+    
     teamPlayers.forEach(player => {
-      // Don't show already completed players
+      // Only show players who haven't completed their innings yet
       if (!completedPlayers.find(cp => cp.id === player.id)) {
         const option = document.createElement('option');
         option.value = player.id;
         option.textContent = `${player.playerName} (${player.position})`;
         playerSelect.appendChild(option);
+        console.log(`Added player: ${player.playerName}`); // Debug log
       }
     });
 
     if (teamPlayers.length === 0) {
       showMessage("No players found for this team. Please add players first.", "warning");
     }
+    
+    // Reset player selection
+    confirmPlayerBtn.disabled = true;
   }
 
   function handlePlayerSelection() {
@@ -189,6 +204,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Verify player belongs to current batting team
+    if (player.teamId !== currentBattingTeam.id) {
+      showMessage("Selected player does not belong to the current batting team", "error");
+      return;
+    }
+
     currentPlayer = player;
     currentPlayerStats = {
       runs: 0,
@@ -196,6 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
       fours: 0,
       sixes: 0
     };
+
+    console.log(`Selected player: ${currentPlayer.playerName} from team: ${currentBattingTeam.name}`); // Debug log
 
     // Hide player selection and show scoreboard
     playerSelectionSection.style.display = "none";
@@ -280,11 +303,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function confirmPlayerOut() {
     if (!currentPlayer) return;
 
-    // Add to completed players
+    // Add to completed players with team information
     completedPlayers.push({
       ...currentPlayer,
-      stats: { ...currentPlayerStats }
+      stats: { ...currentPlayerStats },
+      teamId: currentPlayer.teamId // Ensure team ID is preserved
     });
+
+    console.log(`Player ${currentPlayer.playerName} is out. Completed players:`, completedPlayers.length); // Debug log
 
     // Update team wickets
     teamStats.wickets += 1;
@@ -300,24 +326,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function checkInningsEnd() {
-    const battingTeam = currentInnings === 1 ? matchData.battingFirst : 
-                       (matchData.battingFirst.id === matchData.team1.id ? matchData.team2 : matchData.team1);
-    const teamPlayers = playersData.filter(p => p.teamId === battingTeam.id);
+    // Get players from current batting team only
+    const teamPlayers = playersData.filter(p => p.teamId === currentBattingTeam.id);
     const remainingPlayers = teamPlayers.length - completedPlayers.length;
+
+    console.log(`Team players: ${teamPlayers.length}, Completed: ${completedPlayers.length}, Remaining: ${remainingPlayers}, Wickets: ${teamStats.wickets}`); // Debug log
 
     // Check if all out or target achieved (for 2nd innings)
     if (teamStats.wickets >= 10 || remainingPlayers <= 1) {
+      console.log("Innings ending - all out or only 1 player remaining");
       endInnings();
       return;
     }
 
     // For 2nd innings, check if target is achieved
     if (currentInnings === 2 && matchData.team1Score && teamStats.runs > matchData.team1Score.runs) {
+      console.log("Innings ending - target achieved");
       endInnings();
       return;
     }
 
-    // Reset for next player
+    // Continue with next player from the SAME team
     currentPlayer = null;
     currentPlayerStats = {
       runs: 0,
@@ -326,36 +355,55 @@ document.addEventListener("DOMContentLoaded", () => {
       sixes: 0
     };
 
-    // Show player selection again
+    console.log("Moving to next player from the same team");
+
+    // Show player selection again for the same team
     scoreboardSection.style.display = "none";
     playerSelectionSection.style.display = "block";
-    loadCurrentTeamPlayers();
+    loadCurrentTeamPlayers(); // This will load remaining players from current batting team
   }
 
   function endInnings() {
+    console.log(`Ending innings ${currentInnings}`);
+    
     // Save current innings data
     if (currentInnings === 1) {
-      matchData.team1Score = {
-        ...teamStats,
-        players: [...completedPlayers]
-      };
+      // Determine which team score to save based on batting team
+      if (currentBattingTeam.id === matchData.team1.id) {
+        matchData.team1Score = {
+          ...teamStats,
+          players: [...completedPlayers]
+        };
+      } else {
+        matchData.team2Score = {
+          ...teamStats,
+          players: [...completedPlayers]
+        };
+      }
       
       // Start 2nd innings
       currentInnings = 2;
       showMessage("1st Innings Complete! Starting 2nd Innings...", "success");
       
       setTimeout(() => {
-        initializeInnings();
+        initializeInnings(); // This will set up the second batting team
         scoreboardSection.style.display = "none";
         playerSelectionSection.style.display = "block";
       }, 2000);
       
     } else {
-      // Match complete
-      matchData.team2Score = {
-        ...teamStats,
-        players: [...completedPlayers]
-      };
+      // Match complete - save second innings data
+      if (currentBattingTeam.id === matchData.team1.id) {
+        matchData.team1Score = {
+          ...teamStats,
+          players: [...completedPlayers]
+        };
+      } else {
+        matchData.team2Score = {
+          ...teamStats,
+          players: [...completedPlayers]
+        };
+      }
       
       completeMatch();
     }
@@ -370,11 +418,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let winner = null;
     
     if (team1Score.runs > team2Score.runs) {
-      winner = matchData.battingFirst.id === matchData.team1.id ? matchData.team1 : matchData.team2;
+      winner = matchData.team1;
       const margin = team1Score.runs - team2Score.runs;
       result = `${winner.name} wins by ${margin} runs`;
     } else if (team2Score.runs > team1Score.runs) {
-      winner = matchData.battingFirst.id === matchData.team1.id ? matchData.team2 : matchData.team1;
+      winner = matchData.team2;
       const wicketsLeft = 10 - team2Score.wickets;
       result = `${winner.name} wins by ${wicketsLeft} wickets`;
     } else {
