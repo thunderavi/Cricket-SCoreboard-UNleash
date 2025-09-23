@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("isLoggedIn") === "true") {
       navbar.innerHTML = `
         <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="Team.html">Teams</a></li>
-        <li class="nav-item"><a class="nav-link" href="Match.html">Match</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Pages/Team.html">Teams</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Pages/Match.html">Match</a></li>
         <li class="nav-item"><a class="nav-link" href="./Pages/Dash.html">Dashboard</a></li>
       `;
       if (signupBtnContainer) {
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       navbar.innerHTML = `
         <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="./Pages/Team.html">Teams</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Pages/Team.html">Teams</a></li>
         <li class="nav-item"><a class="nav-link" href="./Pages/Match.html">Match</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
         <li class="nav-item"><a class="nav-link" href="./Pages/SignUp.html">Login</a></li>

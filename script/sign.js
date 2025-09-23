@@ -12,7 +12,7 @@ function updateNavbar() {
   if (localStorage.getItem("isLoggedIn") === "true") {
     navbar.innerHTML = `
       <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Teams</a></li>
+      <li class="nav-item"><a class="nav-link" href="./Team.html">Teams</a></li>
       <li class="nav-item"><a class="nav-link logout-btn" href="#">Logout</a></li>
     `;
     if (signupBtnContainer) {
@@ -29,7 +29,7 @@ function updateNavbar() {
   } else {
     navbar.innerHTML = `
       <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Teams</a></li>
+      <li class="nav-item"><a class="nav-link" href="./Team.html">Teams</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
       <li class="nav-item"><a class="nav-link" href="./Pages/SignUp.html">Login</a></li>
     `;
