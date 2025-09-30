@@ -94,5 +94,5 @@ A fun, interactive Cricket Scoreboard app built with **HTML, CSS, JS, GSAP**, us
 
 [Cricket Scoreboard App](https://cricket-s-coreboard-u-nleash.vercel.app/)
 
-## ScreenShots
+
 
