@@ -16,6 +16,25 @@ A fun, interactive Cricket Scoreboard app built with **HTML, CSS, JS, GSAP**, us
 - ✅ Fully front-end: no PHP or MySQL
 
 ---
+## 🖼 Screenshots
+
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/c7c830e5-f56b-4d66-af2d-bd38f67e39aa" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/ad7925b7-6144-40a9-bfdd-43d4e355b056" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/1863-947.png" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/af5e07ee-ed9c-48e4-8a45-59a5ddd93d76" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/82d78e66-4816-4b62-93d0-55c96f81a365" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/1552a95d-55ca-4888-8324-eda5de88e157" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/fcbfcecb-1cb6-4f42-8696-a1758855a219" width="300"/></td>
+    <td><img src="https://github.com/user-attachments/assets/4069925b-ce5e-4cd3-a15f-3235f55f02ec" width="300"/></td>
+    <td></td>
+  </tr>
+</table>
 
 ## 🚀 Workflow (ASCII Animated Style)
 
@@ -70,25 +89,6 @@ A fun, interactive Cricket Scoreboard app built with **HTML, CSS, JS, GSAP**, us
 - **localStorage** for persistence  
 - **Vercel** for deployment  
 
-## 🖼 Screenshots
-
-<table>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/c7c830e5-f56b-4d66-af2d-bd38f67e39aa" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/ad7925b7-6144-40a9-bfdd-43d4e355b056" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/1863-947.png" width="300"/></td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/af5e07ee-ed9c-48e4-8a45-59a5ddd93d76" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/82d78e66-4816-4b62-93d0-55c96f81a365" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/1552a95d-55ca-4888-8324-eda5de88e157" width="300"/></td>
-  </tr>
-  <tr>
-    <td><img src="https://github.com/user-attachments/assets/fcbfcecb-1cb6-4f42-8696-a1758855a219" width="300"/></td>
-    <td><img src="https://github.com/user-attachments/assets/4069925b-ce5e-4cd3-a15f-3235f55f02ec" width="300"/></td>
-    <td></td>
-  </tr>
-</table>
 
 ## 🔗 Live Demo
 
